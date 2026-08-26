@@ -1,0 +1,12 @@
+{
+  "name": "harshvardhan-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio website for Harshvardhan",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
