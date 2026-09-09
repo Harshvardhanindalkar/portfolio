@@ -1,4 +1,4 @@
-name: Portfolio CI
+name: Portfolio CI/CD
 
 on:
   push:
@@ -24,3 +24,21 @@ jobs:
 
       - name: Check server.js
         run: node --check server.js
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/portfolio
+            git pull origin main
+            npm install
+            pm2 restart portfolio
+            pm2 status
